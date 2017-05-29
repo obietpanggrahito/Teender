@@ -1,0 +1,6 @@
+framework module Pods_Teender {
+  umbrella header "Pods-Teender-umbrella.h"
+
+  export *
+  module * { export * }
+}

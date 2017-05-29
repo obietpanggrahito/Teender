@@ -7,16 +7,38 @@
 //
 
 import UIKit
+import Firebase
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var databaseRef : DatabaseReference!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        FirebaseApp.configure()
+        
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
         return true
+    }
+    
+    func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any])
+        -> Bool {
+            
+        let openAppAllow = FBSDKApplicationDelegate.sharedInstance().application(application, open: url, options: options)
+        return openAppAllow
+    }
+    
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        
+        
+        let openAppAllow = FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication!, annotation:  annotation)
+        return openAppAllow
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
